@@ -25,7 +25,7 @@ export default function Meme() {
     setMeme(prevState => {
       return {
         ...prevState,
-        [name]: value.toUpperCase()
+        [name]: value
       }
     }
     )
@@ -38,7 +38,7 @@ export default function Meme() {
 
   return (
     <div>
-      <form className="meme">
+      <div className="meme">
         <input
           type="text"
           className="meme--input"
@@ -56,11 +56,11 @@ export default function Meme() {
         <button
           className="meme--button"
           onClick={getMemeImage}>Get a new meme image  🖼</button>
-      </form>
+      </div>
       <div className="meme--box">
         <img src={meme.randomImage} alt="memeImage" className="meme--img" />
-        <h2 className="meme--toptext">{meme.topText}</h2>
-        <h2 className="meme--bottomtext">{meme.bottomText}</h2>
+        <h2 className="meme--toptext">{meme.topText.toUpperCase()}</h2>
+        <h2 className="meme--bottomtext">{meme.bottomText.toUpperCase()}</h2>
       </div>
     </div>
   )
