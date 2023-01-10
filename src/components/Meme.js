@@ -1,8 +1,14 @@
 import React from "react"
-import memesData from "../memesData.js"
 
 export default function Meme() {
-  const allMemeImages = memesData.data.memes
+
+  const [allMemes, setAllMemes] = React.useState([])
+
+  React.useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((response) => response.json())
+      .then(data => setAllMemes(data.data.memes))
+  }, [])
 
   const [meme, setMeme] = React.useState({
     topText: "",
@@ -11,11 +17,11 @@ export default function Meme() {
   })
 
   function getMemeImage() {
-    const index = Math.floor(Math.random() * memesData.data.memes.length)
+    const index = Math.floor(Math.random() * allMemes.length)
     setMeme(prevState => {
       return {
         ...prevState,
-        randomImage: allMemeImages[index].url
+        randomImage: allMemes[index].url
       }
     })
   }
@@ -30,11 +36,6 @@ export default function Meme() {
     }
     )
   }
-
-  // function handleSubmit(event) {
-  //   console.log(meme.topText+meme.bottomText)
-  //   event.preventDefualt()
-  // }
 
   return (
     <div>
